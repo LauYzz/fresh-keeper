@@ -6,8 +6,11 @@ import android.widget.Toast
 import androidx.annotation.AttrRes
 import androidx.annotation.ColorInt
 import androidx.appcompat.app.AppCompatActivity
+import com.example.freshkeeper.R
+
+
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import com.progix.fridgex.freshKeeper.R
+
 import com.progix.fridgex.freshKeeper.activity.MainActivity
 import com.progix.fridgex.freshKeeper.data.SharedPreferencesAccess
 import com.progix.fridgex.freshKeeper.fragment.dialog.DialogLoadingFragment
@@ -53,12 +56,7 @@ object Extensions {
                 this,
                 "upgraded"
             ) || DatabaseHelper.mNeedUpdate
-        )
-            println("a")
-        else
-            println("aa")
-
-
+        ) {
             SharedPreferencesAccess.saveBoolean(this, "triedOnce", true)
             SharedPreferencesAccess.saveBoolean(this, "upgraded", false)
             DatabaseHelper.mNeedUpdate = true
@@ -83,13 +81,14 @@ object Extensions {
                             Toast.LENGTH_SHORT
                         )
                             .show()
+                        // 手动重新获取数据库连接
                         MainActivity.mDb = mDBHelper.writableDatabase
                     }
                 }
                 .setCancelable(false)
                 .show()
             SharedPreferencesAccess.saveBoolean(this, "upgraded", false)
-
+        }
     }
 
     private suspend fun asyncUpdatingDatabase(mDBHelper: DatabaseHelper) =

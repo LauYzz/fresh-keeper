@@ -14,6 +14,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.widget.PopupMenu
 import androidx.recyclerview.widget.RecyclerView
+import com.example.freshkeeper.R
 import com.google.android.material.card.MaterialCardView
 import com.progix.fridgex.freshKeeper.R
 import com.progix.fridgex.freshKeeper.activity.MainActivity
@@ -27,10 +28,8 @@ import com.progix.fridgex.freshKeeper.helper.interfaces.ActionModeInterface
 
 
 class BannedProductsAdapter(
-    var context: Context,
-    private var bannedProductsList: ArrayList<Pair<String, String>>
-) :
-    RecyclerView.Adapter<BannedProductsAdapter.ViewHolder>() {
+    var context: Context, private var bannedProductsList: ArrayList<Pair<String, String>>
+) : RecyclerView.Adapter<BannedProductsAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
@@ -60,8 +59,7 @@ class BannedProductsAdapter(
 
     @SuppressLint("NotifyDataSetChanged")
     private fun popupMenus(
-        view: View,
-        position: Int
+        view: View, position: Int
     ) {
         val popupMenus = PopupMenu(context, view)
         inflatePopup(popupMenus)
@@ -81,13 +79,11 @@ class BannedProductsAdapter(
                     Handler(Looper.getMainLooper()).postDelayed({
                         notifyDataSetChanged()
                     }, 500)
-                    CustomSnackbar(context)
-                        .create(
+                    CustomSnackbar(context).create(
                             55,
                             (context as MainActivity).findViewById(R.id.main_root),
                             context.getString(R.string.deletedFromBanned)
-                        )
-                        .setAction(context.getString(R.string.undo)) {
+                        ).setAction(context.getString(R.string.undo)) {
                             mDb.execSQL(
                                 "UPDATE products SET banned = 1 WHERE product = ?",
                                 listOf(tempValue.first).toTypedArray()
@@ -96,8 +92,7 @@ class BannedProductsAdapter(
                             prodAnno?.visibility = View.GONE
                             if (bannedProductsList.isNotEmpty()) notifyItemInserted(position)
                             bannedProductsList.add(position, tempValue)
-                        }
-                        .show()
+                        }.show()
                     true
                 }
 
@@ -201,13 +196,11 @@ class BannedProductsAdapter(
                 Handler(Looper.getMainLooper()).postDelayed({
                     notifyDataSetChanged()
                 }, 500)
-                CustomSnackbar(context)
-                    .create(
+                CustomSnackbar(context).create(
                         55,
                         (context as MainActivity).findViewById(R.id.main_root),
                         context.getString(R.string.deletedFromBanned)
-                    )
-                    .setAction(context.getString(R.string.undo)) {
+                    ).setAction(context.getString(R.string.undo)) {
                         prodRecycler?.visibility = View.VISIBLE
                         prodAnno?.visibility = View.GONE
                         for (i in 0 until tempList!!.size) {
@@ -217,14 +210,12 @@ class BannedProductsAdapter(
                                 listOf(temp).toTypedArray()
                             )
                             if (indexes[i] < bannedProductsList.size) bannedProductsList.add(
-                                indexes[i],
-                                delList[i]
+                                indexes[i], delList[i]
                             )
                             else bannedProductsList.add(delList[i])
                         }
                         notifyDataSetChanged()
-                    }
-                    .show()
+                    }.show()
             }
         }
         isMultiSelectOn = false
@@ -232,8 +223,7 @@ class BannedProductsAdapter(
 
     private var lastPosition = -1
     private fun setAnimation(viewToAnimate: View, position: Int) {
-        val animation: Animation =
-            loadAnimation(context, R.anim.item_animation_fall_down)
+        val animation: Animation = loadAnimation(context, R.anim.item_animation_fall_down)
         viewToAnimate.startAnimation(animation)
         lastPosition = position
     }
