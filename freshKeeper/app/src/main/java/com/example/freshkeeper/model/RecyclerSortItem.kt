@@ -1,4 +1,4 @@
-package com.progix.fridgex.light.model
+package com.example.freshkeeper.model
 
 class RecyclerSortItem(
     var amount: Double,

@@ -1,8 +1,7 @@
-package com.progix.fridgex.light.data
+package com.example.freshkeeper.data
 
 import android.graphics.Color.*
 import com.example.freshkeeper.R
-import com.progix.fridgex.light.R
 
 object DataArrays {
 

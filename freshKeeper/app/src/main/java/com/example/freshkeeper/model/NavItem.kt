@@ -1,4 +1,4 @@
-package com.progix.fridgex.light.model
+package com.example.freshkeeper.model
 
 class NavItem(
     var name: String,
