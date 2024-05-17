@@ -74,8 +74,7 @@ class DialogSearchProductsAdapter(var context: Context, private var prodList: Ar
 
     private var lastPosition = -1
     private fun setAnimation(viewToAnimate: View, position: Int) {
-        val animation: Animation =
-            loadAnimation(context, R.anim.item_animation_fall_down)
+        val animation: Animation = loadAnimation(context, R.anim.item_animation_fall_down)
         viewToAnimate.startAnimation(animation)
         lastPosition = position
     }

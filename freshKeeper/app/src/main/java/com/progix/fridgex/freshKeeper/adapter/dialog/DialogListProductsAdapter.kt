@@ -22,8 +22,7 @@ class DialogListProductsAdapter(
     var context: Context,
     private var prodList: ArrayList<String>,
     private var hintList: ArrayList<String>
-) :
-    RecyclerView.Adapter<DialogListProductsAdapter.ViewHolder>() {
+) : RecyclerView.Adapter<DialogListProductsAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
             LayoutInflater.from(parent.context)
