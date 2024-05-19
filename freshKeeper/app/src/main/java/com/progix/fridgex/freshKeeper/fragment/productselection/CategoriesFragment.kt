@@ -58,10 +58,8 @@ class CategoriesFragment : Fragment(R.layout.fragment_categories) {
         inflater.inflate(R.menu.folder_menu, menu)
         val myActionMenuItem = menu.findItem(R.id.search_search)
         val searchView = myActionMenuItem.actionView as SearchView
-        searchView.queryTextChangeEvents()
-            .debounce(350, TimeUnit.MILLISECONDS)
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe {
+        searchView.queryTextChangeEvents().debounce(350, TimeUnit.MILLISECONDS)
+            .observeOn(AndroidSchedulers.mainThread()).subscribe {
                 search(it.queryText.toString(), arguments?.getInt("prodCat"))
             }
 
@@ -73,8 +71,7 @@ class CategoriesFragment : Fragment(R.layout.fragment_categories) {
             val pairArrayList = ArrayList<Pair<Int, String>>()
             val list = ArrayList<String>()
             for (item in allProducts!!) {
-                val temp: Int =
-                    searchString(s.lowercase(), item)
+                val temp: Int = searchString(s.lowercase(), item)
                 if (temp != 101) {
                     pairArrayList.add(Pair(temp, item))
                 }

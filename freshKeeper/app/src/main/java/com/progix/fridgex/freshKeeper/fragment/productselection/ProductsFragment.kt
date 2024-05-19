@@ -10,6 +10,7 @@ import androidx.appcompat.widget.SearchView
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
+import com.example.freshkeeper.R
 import com.google.android.material.transition.MaterialFadeThrough
 import com.jakewharton.rxbinding4.appcompat.queryTextChangeEvents
 import com.progix.fridgex.freshKeeper.R
@@ -84,8 +85,7 @@ class ProductsFragment : Fragment(R.layout.fragment_products) {
             val pairArrayList = ArrayList<Pair<Int, String>>()
             val list = ArrayList<String>()
             for (item in allProducts!!) {
-                val temp: Int =
-                    searchString(s.lowercase(), item)
+                val temp: Int = searchString(s.lowercase(), item)
                 if (temp != 101) {
                     pairArrayList.add(Pair(temp, item))
                 }
@@ -106,10 +106,8 @@ class ProductsFragment : Fragment(R.layout.fragment_products) {
         inflater.inflate(R.menu.folder_menu, menu)
         val myActionMenuItem = menu.findItem(R.id.search_search)
         val searchView = myActionMenuItem.actionView as SearchView
-        searchView.queryTextChangeEvents()
-            .debounce(350, TimeUnit.MILLISECONDS)
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe {
+        searchView.queryTextChangeEvents().debounce(350, TimeUnit.MILLISECONDS)
+            .observeOn(AndroidSchedulers.mainThread()).subscribe {
                 search(it.queryText.toString(), arguments?.getInt("prodCat"))
             }
 
