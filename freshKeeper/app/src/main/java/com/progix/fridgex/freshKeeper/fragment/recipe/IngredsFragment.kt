@@ -47,8 +47,7 @@ class IngredsFragment : Fragment(R.layout.fragment_ingreds) {
         val range = products.size - 1
         for (i in 0..range) {
             val cursor2: Cursor = mDb.rawQuery(
-                "SELECT * FROM products WHERE id = ?",
-                listOf(products[i]).toTypedArray()
+                "SELECT * FROM products WHERE id = ?", listOf(products[i]).toTypedArray()
             )
             cursor2.moveToFirst()
             missList?.add(cursor2.getInt(3) == 0)
@@ -60,13 +59,11 @@ class IngredsFragment : Fragment(R.layout.fragment_ingreds) {
                 tempCursor.moveToFirst()
                 prodList!!.add(
                     Pair(
-                        cursor2.getString(2),
-                        amount[i] + " " + tempCursor.getString(2)
+                        cursor2.getString(2), amount[i] + " " + tempCursor.getString(2)
                     )
                 )
                 tempCursor.close()
-            } else
-                prodList!!.add(Pair(cursor2.getString(2), getString(R.string.taste)))
+            } else prodList!!.add(Pair(cursor2.getString(2), getString(R.string.taste)))
             cursor2.close()
         }
         slider.addOnChangeListener(Slider.OnChangeListener { _, valuer, _ ->
@@ -75,13 +72,11 @@ class IngredsFragment : Fragment(R.layout.fragment_ingreds) {
             missList?.clear()
             val rangeLocal = products.size - 1
             val df = DecimalFormat("#.#")
-            v.findViewById<TextView>(R.id.text).text =
-                getString(R.string.portions) + " " + portions
+            v.findViewById<TextView>(R.id.text).text = getString(R.string.portions) + " " + portions
 
             for (i in 0..rangeLocal) {
                 val cursor2: Cursor = mDb.rawQuery(
-                    "SELECT * FROM products WHERE id = ?",
-                    listOf(products[i]).toTypedArray()
+                    "SELECT * FROM products WHERE id = ?", listOf(products[i]).toTypedArray()
                 )
                 cursor2.moveToFirst()
                 missList?.add(cursor2.getInt(3) == 0)
@@ -108,8 +103,7 @@ class IngredsFragment : Fragment(R.layout.fragment_ingreds) {
                         )
                     )
                     tempCursor.close()
-                } else
-                    prodList!!.add(Pair(cursor2.getString(2), getString(R.string.taste)))
+                } else prodList!!.add(Pair(cursor2.getString(2), getString(R.string.taste)))
                 cursor2.close()
             }
             recycler.adapter = IngredientsAdapter(requireContext(), prodList!!, missList!!)
@@ -148,14 +142,14 @@ class IngredsFragment : Fragment(R.layout.fragment_ingreds) {
                         tcnt++
                     }
                 }
-                MaterialAlertDialogBuilder(requireContext(), R.style.modeAlert)
-                    .setTitle(getString(R.string.chooseProd))
-                    .setMultiChoiceItems(
+                MaterialAlertDialogBuilder(
+                    requireContext(),
+                    R.style.modeAlert
+                ).setTitle(getString(R.string.chooseProd)).setMultiChoiceItems(
                         names, bool
                     ) { _, which: Int, isChecked: Boolean ->
                         bool[which] = isChecked
-                    }
-                    .setPositiveButton(
+                    }.setPositiveButton(
                         getString(R.string.ok)
                     ) { _, _ ->
                         badgeCnt = 0
@@ -175,8 +169,7 @@ class IngredsFragment : Fragment(R.layout.fragment_ingreds) {
                             (context as SecondActivity).findViewById(R.id.main_root),
                             getString(R.string.addedToCart),
                             Snackbar.LENGTH_LONG
-                        )
-                            .setAction(getString(R.string.undo)) {
+                        ).setAction(getString(R.string.undo)) {
                                 for (i in badgeBool!!.indices) {
                                     if (badgeBool!![i]) {
                                         mDb.execSQL(
@@ -186,11 +179,8 @@ class IngredsFragment : Fragment(R.layout.fragment_ingreds) {
                                         badgeCnt--
                                     }
                                 }
-                            }
-                            .show()
-                    }
-                    .setNegativeButton(getString(R.string.cancel), null)
-                    .setCancelable(false)
+                            }.show()
+                    }.setNegativeButton(getString(R.string.cancel), null).setCancelable(false)
                     .show()
             }
         }
