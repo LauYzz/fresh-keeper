@@ -73,12 +73,7 @@ class FridgeAdapter(var context: Context, private var fridgeList: ArrayList<Pair
 
     @SuppressLint("NotifyDataSetChanged")
     private fun popupMenus(
-        view: View,
-        id: Int,
-        position: Int,
-        starred: Boolean,
-        banned: Boolean,
-        inCart: Boolean
+        view: View, id: Int, position: Int, starred: Boolean, banned: Boolean, inCart: Boolean
     ) {
         val popupMenus = PopupMenu(context, view)
         inflatePopup(popupMenus, starred, banned, inCart)
@@ -87,11 +82,7 @@ class FridgeAdapter(var context: Context, private var fridgeList: ArrayList<Pair
                 R.id.star_recipe -> {
                     mDb.execSQL("UPDATE products SET is_starred = 1 WHERE id = $id")
                     showSnackBar(
-                        context.getString(R.string.addedToStarred),
-                        id,
-                        position,
-                        "is_starred",
-                        0
+                        context.getString(R.string.addedToStarred), id, position, "is_starred", 0
                     )
                     notifyItemChanged(position)
                     true
@@ -99,11 +90,7 @@ class FridgeAdapter(var context: Context, private var fridgeList: ArrayList<Pair
                 R.id.ban_recipe -> {
                     mDb.execSQL("UPDATE products SET banned = 1 WHERE id = $id")
                     showSnackBar(
-                        context.getString(R.string.addedToBanList),
-                        id,
-                        position,
-                        "banned",
-                        0
+                        context.getString(R.string.addedToBanList), id, position, "banned", 0
                     )
                     notifyItemChanged(position)
                     true
@@ -111,11 +98,7 @@ class FridgeAdapter(var context: Context, private var fridgeList: ArrayList<Pair
                 R.id.de_star_recipe -> {
                     mDb.execSQL("UPDATE products SET is_starred = 0 WHERE id = $id")
                     showSnackBar(
-                        context.getString(R.string.delStarProd),
-                        id,
-                        position,
-                        "is_starred",
-                        1
+                        context.getString(R.string.delStarProd), id, position, "is_starred", 1
                     )
                     notifyItemChanged(position)
                     true
@@ -131,11 +114,7 @@ class FridgeAdapter(var context: Context, private var fridgeList: ArrayList<Pair
                         .getOrCreateBadge(R.id.nav_cart).number += 1
                     mDb.execSQL("UPDATE products SET is_in_cart = 1 WHERE id = $id")
                     showSnackBar(
-                        context.getString(R.string.addedToCart),
-                        id,
-                        position,
-                        "is_in_cart",
-                        0
+                        context.getString(R.string.addedToCart), id, position, "is_in_cart", 0
                     )
                     notifyItemChanged(position)
                     true
@@ -154,13 +133,11 @@ class FridgeAdapter(var context: Context, private var fridgeList: ArrayList<Pair
                         FridgeFragment.recycler!!.visibility = GONE
                         FridgeFragment.annotationCard!!.visibility = VISIBLE
                     } else notifyItemRemoved(position)
-                    CustomSnackbar(context)
-                        .create(
+                    CustomSnackbar(context).create(
                             (context as MainActivity).findViewById(R.id.main_root),
                             context.getString(R.string.delFridgeProduct),
                             Snackbar.LENGTH_SHORT
-                        )
-                        .setAction(context.getString(R.string.undo)) {
+                        ).setAction(context.getString(R.string.undo)) {
                             mDb.execSQL(
                                 "UPDATE products SET is_in_fridge = 1 WHERE product = ?",
                                 listOf(tempValue.first).toTypedArray()
@@ -169,8 +146,7 @@ class FridgeAdapter(var context: Context, private var fridgeList: ArrayList<Pair
                             FridgeFragment.annotationCard!!.visibility = GONE
                             if (fridgeList.isNotEmpty()) notifyItemInserted(position)
                             fridgeList.add(position, tempValue)
-                        }
-                        .show()
+                        }.show()
                     true
                 }
                 else -> true
@@ -182,10 +158,7 @@ class FridgeAdapter(var context: Context, private var fridgeList: ArrayList<Pair
     }
 
     private fun inflatePopup(
-        popupMenus: PopupMenu,
-        starred: Boolean,
-        banned: Boolean,
-        inCart: Boolean
+        popupMenus: PopupMenu, starred: Boolean, banned: Boolean, inCart: Boolean
     ) {
         if (!inCart) popupMenus.menu.add(0, R.id.nav_cart, 0, context.getString(R.string.toCart))
             ?.setIcon(R.drawable.ic_baseline_shopping_cart_24)
@@ -199,13 +172,9 @@ class FridgeAdapter(var context: Context, private var fridgeList: ArrayList<Pair
     }
 
     private fun showSnackBar(text: String, id: Int, position: Int, modifier: String, value: Int) {
-        CustomSnackbar(context)
-            .create(
-                (context as MainActivity).findViewById(R.id.main_root),
-                text,
-                Snackbar.LENGTH_SHORT
-            )
-            .setAction(context.getString(R.string.undo)) {
+        CustomSnackbar(context).create(
+                (context as MainActivity).findViewById(R.id.main_root), text, Snackbar.LENGTH_SHORT
+            ).setAction(context.getString(R.string.undo)) {
                 mDb.execSQL("UPDATE products SET $modifier = $value WHERE id = $id")
                 notifyItemChanged(position)
                 if (modifier == "is_in_cart") {
@@ -217,8 +186,7 @@ class FridgeAdapter(var context: Context, private var fridgeList: ArrayList<Pair
                         R.id.bottom_navigation
                     ).removeBadge(R.id.nav_cart)
                 }
-            }
-            .show()
+            }.show()
     }
 
 
@@ -235,11 +203,7 @@ class FridgeAdapter(var context: Context, private var fridgeList: ArrayList<Pair
         }
 
         fun bind(
-            id: Int,
-            position: Int,
-            starred: Boolean,
-            banned: Boolean,
-            inCart: Boolean
+            id: Int, position: Int, starred: Boolean, banned: Boolean, inCart: Boolean
         ) {
             itemView.setOnLongClickListener {
                 if (!isMultiSelectOn) {
@@ -299,13 +263,11 @@ class FridgeAdapter(var context: Context, private var fridgeList: ArrayList<Pair
                     )
                     notifyItemChanged(tempPositions!![i])
                 }
-                CustomSnackbar(context)
-                    .create(
+                CustomSnackbar(context).create(
                         (context as MainActivity).findViewById(R.id.main_root),
                         context.getString(R.string.addedToStarred),
                         Snackbar.LENGTH_SHORT
-                    )
-                    .setAction(context.getString(R.string.undo)) {
+                    ).setAction(context.getString(R.string.undo)) {
                         for (i in 0 until tempList!!.size) {
                             val temp = tempList!![i]
                             mDb.execSQL(
@@ -314,8 +276,7 @@ class FridgeAdapter(var context: Context, private var fridgeList: ArrayList<Pair
                             )
                             notifyItemChanged(tempPositions!![i])
                         }
-                    }
-                    .show()
+                    }.show()
             }
             "cart" -> {
                 for (i in 0 until tempList!!.size) {
@@ -327,13 +288,11 @@ class FridgeAdapter(var context: Context, private var fridgeList: ArrayList<Pair
                     notifyItemChanged(tempPositions!![i])
                 }
                 bottomNav.getOrCreateBadge(R.id.nav_cart).number += tempList!!.size
-                CustomSnackbar(context)
-                    .create(
+                CustomSnackbar(context).create(
                         (context as MainActivity).findViewById(R.id.main_root),
                         context.getString(R.string.addToCart),
                         Snackbar.LENGTH_SHORT
-                    )
-                    .setAction(context.getString(R.string.undo)) {
+                    ).setAction(context.getString(R.string.undo)) {
                         for (i in 0 until tempList!!.size) {
                             val temp = tempList!![i]
                             mDb.execSQL(
@@ -345,8 +304,7 @@ class FridgeAdapter(var context: Context, private var fridgeList: ArrayList<Pair
                         val badge = bottomNav.getOrCreateBadge(R.id.nav_cart)
                         badge.number -= tempList!!.size
                         if (badge.number == 0) bottomNav.removeBadge(R.id.nav_cart)
-                    }
-                    .show()
+                    }.show()
             }
             "ban" -> {
                 for (i in 0 until tempList!!.size) {
@@ -357,13 +315,11 @@ class FridgeAdapter(var context: Context, private var fridgeList: ArrayList<Pair
                     )
                     notifyItemChanged(tempPositions!![i])
                 }
-                CustomSnackbar(context)
-                    .create(
+                CustomSnackbar(context).create(
                         (context as MainActivity).findViewById(R.id.main_root),
                         context.getString(R.string.addedToBanList),
                         Snackbar.LENGTH_SHORT
-                    )
-                    .setAction(context.getString(R.string.undo)) {
+                    ).setAction(context.getString(R.string.undo)) {
                         for (i in 0 until tempList!!.size) {
                             val temp = tempList!![i]
                             mDb.execSQL(
@@ -372,12 +328,10 @@ class FridgeAdapter(var context: Context, private var fridgeList: ArrayList<Pair
                             )
                             notifyItemChanged(tempPositions!![i])
                         }
-                    }
-                    .show()
+                    }.show()
             }
             "delete" -> {
-                val layoutParams =
-                    bottomNav.layoutParams as CoordinatorLayout.LayoutParams
+                val layoutParams = bottomNav.layoutParams as CoordinatorLayout.LayoutParams
                 val behavior = layoutParams.behavior as HideBottomViewOnScrollBehavior
                 behavior.slideUp(bottomNav)
 
@@ -403,13 +357,11 @@ class FridgeAdapter(var context: Context, private var fridgeList: ArrayList<Pair
                 Handler(getMainLooper()).postDelayed({
                     notifyDataSetChanged()
                 }, 500)
-                CustomSnackbar(context)
-                    .create(
+                CustomSnackbar(context).create(
                         (context as MainActivity).findViewById(R.id.main_root),
                         context.getString(R.string.deleteFromFridge),
                         Snackbar.LENGTH_SHORT
-                    )
-                    .setAction(context.getString(R.string.undo)) {
+                    ).setAction(context.getString(R.string.undo)) {
                         behavior.slideUp(bottomNav)
                         FridgeFragment.recycler!!.visibility = VISIBLE
                         FridgeFragment.annotationCard!!.visibility = GONE
@@ -423,8 +375,7 @@ class FridgeAdapter(var context: Context, private var fridgeList: ArrayList<Pair
                             else fridgeList.add(delList[i])
                         }
                         notifyDataSetChanged()
-                    }
-                    .show()
+                    }.show()
             }
         }
         isMultiSelectOn = false
@@ -432,8 +383,7 @@ class FridgeAdapter(var context: Context, private var fridgeList: ArrayList<Pair
 
     private var lastPosition = -1
     private fun setAnimation(viewToAnimate: View, position: Int) {
-        val animation: Animation =
-            loadAnimation(context, R.anim.item_animation_fall_down)
+        val animation: Animation = loadAnimation(context, R.anim.item_animation_fall_down)
         viewToAnimate.startAnimation(animation)
         lastPosition = position
     }

@@ -9,6 +9,7 @@ import android.view.animation.AnimationUtils.loadAnimation
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.freshkeeper.R
 import com.progix.fridgex.freshKeeper.R
 
 
@@ -47,8 +48,7 @@ class FolderCategoriesAdapter(
         }
 
         fun bind(
-            onClickListener: OnClickListener,
-            id: Int
+            onClickListener: OnClickListener, id: Int
         ) {
             itemView.setOnClickListener {
                 onClickListener.onClick(image, id)
@@ -58,15 +58,13 @@ class FolderCategoriesAdapter(
 
     class OnClickListener(val clickListener: (ImageView, Int) -> Unit) {
         fun onClick(
-            image: ImageView,
-            id: Int
+            image: ImageView, id: Int
         ) = clickListener(image, id)
     }
 
     private var lastPosition = -1
     private fun setAnimation(viewToAnimate: View, position: Int) {
-        val animation: Animation =
-            loadAnimation(context, R.anim.item_animation_fall_down)
+        val animation: Animation = loadAnimation(context, R.anim.item_animation_fall_down)
         viewToAnimate.startAnimation(animation)
         lastPosition = position
     }
