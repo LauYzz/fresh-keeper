@@ -15,6 +15,7 @@ import android.widget.TextView
 import androidx.appcompat.widget.PopupMenu
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.freshkeeper.R
 import com.google.android.material.snackbar.Snackbar
 import com.progix.fridgex.freshKeeper.R
 import com.progix.fridgex.freshKeeper.activity.MainActivity

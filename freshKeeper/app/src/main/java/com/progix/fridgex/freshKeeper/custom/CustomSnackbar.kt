@@ -8,15 +8,14 @@ import android.view.Gravity
 import android.view.Gravity.TOP
 import android.view.View
 import androidx.coordinatorlayout.widget.CoordinatorLayout
+import com.example.freshkeeper.R
 import com.google.android.material.snackbar.Snackbar
 import com.progix.fridgex.freshKeeper.R
 import com.progix.fridgex.freshKeeper.extensions.Extensions.getAttrColor
 
 class CustomSnackbar(val context: Context) {
     fun create(
-        view: View?,
-        text: String?,
-        duration: Int
+        view: View?, text: String?, duration: Int
     ): Snackbar {
         val snackBar = Snackbar.make(view!!, text!!, duration)
             .setActionTextColor(context.getAttrColor(R.attr.checked))
@@ -33,9 +32,7 @@ class CustomSnackbar(val context: Context) {
     }
 
     fun create(
-        indefinite: Boolean,
-        view: View?,
-        text: String?
+        indefinite: Boolean, view: View?, text: String?
     ): Snackbar {
         var length = Snackbar.LENGTH_LONG
         if (indefinite) {
@@ -56,10 +53,7 @@ class CustomSnackbar(val context: Context) {
     }
 
     fun create(
-        leftMargin: Int,
-        view: View?,
-        text: String?,
-        duration: Int
+        leftMargin: Int, view: View?, text: String?, duration: Int
     ): Snackbar {
         val snackBar = Snackbar.make(view!!, text!!, duration)
             .setActionTextColor(context.getAttrColor(R.attr.checked))
@@ -76,9 +70,7 @@ class CustomSnackbar(val context: Context) {
             val displayMetrics = context.resources.displayMetrics
             val dpWidth = (displayMetrics.widthPixels / displayMetrics.density).toInt() - leftMargin
             val pixels = TypedValue.applyDimension(
-                TypedValue.COMPLEX_UNIT_DIP,
-                dpWidth.toFloat(),
-                context.resources.displayMetrics
+                TypedValue.COMPLEX_UNIT_DIP, dpWidth.toFloat(), context.resources.displayMetrics
             )
             params.width = pixels.toInt()
             params.anchorId = R.id.tabs
@@ -90,9 +82,7 @@ class CustomSnackbar(val context: Context) {
     }
 
     fun create(
-        bottomMargin: Int,
-        view: View?,
-        text: String?
+        bottomMargin: Int, view: View?, text: String?
     ): Snackbar {
         val snackBar = Snackbar.make(view!!, text!!, Snackbar.LENGTH_SHORT)
             .setActionTextColor(context.getAttrColor(R.attr.checked))
