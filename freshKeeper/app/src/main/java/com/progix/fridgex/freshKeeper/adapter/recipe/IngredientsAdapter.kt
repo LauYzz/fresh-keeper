@@ -14,8 +14,7 @@ class IngredientsAdapter(
     var context: Context,
     private var ingredientsList: ArrayList<Pair<String, String>>,
     private var missing: ArrayList<Boolean>
-) :
-    RecyclerView.Adapter<IngredientsAdapter.ViewHolder>() {
+) : RecyclerView.Adapter<IngredientsAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(

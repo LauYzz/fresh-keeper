@@ -55,8 +55,10 @@ class InfoAdapter(var context: Context, private var infoList: ArrayList<InfoItem
 
                 if (position == 0) {
                     holder.itemView.setOnClickListener {
-                        MaterialAlertDialogBuilder(context, R.style.modeAlert)
-                            .setTitle(context.getString(R.string.timer))
+                        MaterialAlertDialogBuilder(
+                            context,
+                            R.style.modeAlert
+                        ).setTitle(context.getString(R.string.timer))
                             .setMessage(context.getString(R.string.setTimer) + SecondActivity.name)
                             .setPositiveButton(
                                 context.getString(R.string.cont)
@@ -69,9 +71,7 @@ class InfoAdapter(var context: Context, private var infoList: ArrayList<InfoItem
                                 intent.putExtra(EXTRA_SKIP_UI, false)
                                 intent.putExtra(EXTRA_MESSAGE, SecondActivity.name)
                                 context.startActivity(intent)
-                            }
-                            .setNegativeButton(context.getString(R.string.cancel), null)
-                            .show()
+                            }.setNegativeButton(context.getString(R.string.cancel), null).show()
                     }
                 }
 
@@ -81,8 +81,10 @@ class InfoAdapter(var context: Context, private var infoList: ArrayList<InfoItem
                 holder.image.setImageResource(infoList[position].image)
                 if (infoList[position].name == context.getString(R.string.source) && infoList[position].value != "Авторский") {
                     holder.itemView.setOnClickListener {
-                        MaterialAlertDialogBuilder(context, R.style.modeAlert)
-                            .setTitle(context.getString(R.string.redirect))
+                        MaterialAlertDialogBuilder(
+                            context,
+                            R.style.modeAlert
+                        ).setTitle(context.getString(R.string.redirect))
                             .setMessage(context.getString(R.string.redirectMessage))
                             .setPositiveButton(
                                 context.getString(R.string.cont)
@@ -90,9 +92,7 @@ class InfoAdapter(var context: Context, private var infoList: ArrayList<InfoItem
                                 val url = "http://" + infoList[position].value
                                 val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
                                 context.startActivity(browserIntent)
-                            }
-                            .setNegativeButton(context.getString(R.string.cancel), null)
-                            .show()
+                            }.setNegativeButton(context.getString(R.string.cancel), null).show()
                     }
                 } else if (infoList[position].value == "Авторский") {
                     holder.image.setImageResource(R.drawable.ic_round_edit_24)
@@ -105,8 +105,10 @@ class InfoAdapter(var context: Context, private var infoList: ArrayList<InfoItem
 
                 if (position == 0) {
                     holder.itemView.setOnClickListener {
-                        MaterialAlertDialogBuilder(context, R.style.modeAlert)
-                            .setTitle(context.getString(R.string.timer))
+                        MaterialAlertDialogBuilder(
+                            context,
+                            R.style.modeAlert
+                        ).setTitle(context.getString(R.string.timer))
                             .setMessage(context.getString(R.string.setTimer) + SecondActivity.name)
                             .setPositiveButton(
                                 context.getString(R.string.cont)
@@ -119,9 +121,7 @@ class InfoAdapter(var context: Context, private var infoList: ArrayList<InfoItem
                                 intent.putExtra(EXTRA_SKIP_UI, false)
                                 intent.putExtra(EXTRA_MESSAGE, SecondActivity.name)
                                 context.startActivity(intent)
-                            }
-                            .setNegativeButton(context.getString(R.string.cancel), null)
-                            .show()
+                            }.setNegativeButton(context.getString(R.string.cancel), null).show()
                     }
                 }
 
@@ -130,8 +130,10 @@ class InfoAdapter(var context: Context, private var infoList: ArrayList<InfoItem
                 holder.image.setImageResource(infoList[position].image)
                 if (infoList[position].name == context.getString(R.string.source) && infoList[position].value != "Авторский") {
                     holder.itemView.setOnClickListener {
-                        MaterialAlertDialogBuilder(context, R.style.modeAlert)
-                            .setTitle(context.getString(R.string.redirect))
+                        MaterialAlertDialogBuilder(
+                            context,
+                            R.style.modeAlert
+                        ).setTitle(context.getString(R.string.redirect))
                             .setMessage(context.getString(R.string.redirectMessage))
                             .setPositiveButton(
                                 context.getString(R.string.cont)
@@ -139,9 +141,7 @@ class InfoAdapter(var context: Context, private var infoList: ArrayList<InfoItem
                                 val url = "http://" + infoList[position].value
                                 val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
                                 context.startActivity(browserIntent)
-                            }
-                            .setNegativeButton(context.getString(R.string.cancel), null)
-                            .show()
+                            }.setNegativeButton(context.getString(R.string.cancel), null).show()
                     }
                 } else if (infoList[position].value == "Авторский") {
                     holder.image.setImageResource(R.drawable.ic_round_edit_24)

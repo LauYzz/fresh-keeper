@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.freshkeeper.R
 import com.google.android.material.card.MaterialCardView
 import com.google.android.material.snackbar.Snackbar
 import com.progix.fridgex.freshKeeper.R
@@ -51,16 +52,14 @@ class RecipeAdapter(var fragment: RecipeFragment, var recipeList: List<String>) 
                     (fragment.requireActivity() as SecondActivity).mainRoot,
                     fragment.requireContext().getString(R.string.bonAppetit),
                     Snackbar.LENGTH_LONG
-                )
-                    .setAction(fragment.requireContext().getString(R.string.repeat)) {
+                ).setAction(fragment.requireContext().getString(R.string.repeat)) {
                         currentStep = 0
                         fragment.recycler.animate().alpha(0f).setDuration(200L).withEndAction {
                             notifyDataSetChanged()
                             fragment.recycler.scrollToPosition(0)
                             fragment.recycler.animate().alpha(1f).setDuration(200L).start()
                         }.start()
-                    }
-                    .show()
+                    }.show()
             }
 
             holder.nextButton.setOnClickListener {}
@@ -71,8 +70,7 @@ class RecipeAdapter(var fragment: RecipeFragment, var recipeList: List<String>) 
             notifyItemChanged(position + 1)
 
             (fragment.recycler.layoutManager as LinearLayoutManager).scrollToPositionWithOffset(
-                currentStep,
-                0
+                currentStep, 0
             )
         }
     }

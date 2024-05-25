@@ -16,11 +16,8 @@ import com.progix.fridgex.freshKeeper.model.NavItem
 
 
 class SearchFilterNavigationAdapter(
-    var context: Context,
-    var navList: ArrayList<NavItem>,
-    var onClickListener: OnClickListener
-) :
-    RecyclerView.Adapter<SearchFilterNavigationAdapter.ViewHolder>() {
+    var context: Context, var navList: ArrayList<NavItem>, var onClickListener: OnClickListener
+) : RecyclerView.Adapter<SearchFilterNavigationAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         if (context is FreshKeeperApplication) context =
             (context as FreshKeeperApplication).getCurrentContext()!!
