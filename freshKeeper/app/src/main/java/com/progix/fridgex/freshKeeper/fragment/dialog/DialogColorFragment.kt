@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import androidx.recyclerview.widget.RecyclerView
+import com.example.freshkeeper.R
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.transition.platform.MaterialFadeThrough
 import com.progix.fridgex.freshKeeper.R
@@ -40,16 +41,16 @@ class DialogColorFragment : DialogFragment(), SettingsInterface {
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        val dialogBuilder =
-            MaterialAlertDialogBuilder(requireActivity(), R.style.modeAlert)
-                .setTitle(R.string.themeChooser)
-                .setPositiveButton(R.string.ok) { dialog, _ ->
-                    dialog.dismiss()
-                    if (currentColor != loadTheme(requireContext())) {
-                        requireActivity().recreate()
-                        saveTheme(requireContext(), currentColor)
-                    }
+        val dialogBuilder = MaterialAlertDialogBuilder(
+            requireActivity(),
+            R.style.modeAlert
+        ).setTitle(R.string.themeChooser).setPositiveButton(R.string.ok) { dialog, _ ->
+                dialog.dismiss()
+                if (currentColor != loadTheme(requireContext())) {
+                    requireActivity().recreate()
+                    saveTheme(requireContext(), currentColor)
                 }
+            }
 
         val view = requireActivity().layoutInflater.inflate(R.layout.theme_picker_dialog, null)
         onViewCreated(view, null)

@@ -57,12 +57,10 @@ class DailyFragment : Fragment(R.layout.fragment_daily) {
         job = CoroutineScope(Dispatchers.Main).launch {
             val recipeList: ArrayList<RecipeItem> = startCoroutine()
             loading.visibility = View.GONE
-            dailyRecycler.adapter =
-                DailyAdapter(appContext, recipeList, recipeClicker)
+            dailyRecycler.adapter = DailyAdapter(appContext, recipeList, recipeClicker)
             swipeRefresh.setProgressBackgroundColorSchemeColor(
                 ContextCompat.getColor(
-                    appContext,
-                    R.color.manualBackground
+                    appContext, R.color.manualBackground
                 )
             )
         }
@@ -72,13 +70,11 @@ class DailyFragment : Fragment(R.layout.fragment_daily) {
             requireContext().getAttrColor(R.attr.checkedl)
         )
         swipeRefresh.setOnRefreshListener {
-            MaterialAlertDialogBuilder(requireContext())
-                .setTitle(getString(R.string.updateDailyRecipes))
+            MaterialAlertDialogBuilder(requireContext()).setTitle(getString(R.string.updateDailyRecipes))
                 .setMessage(getString(R.string.thisWillUpdateDailyRecipes))
                 .setNegativeButton(getString(R.string.cancel)) { _, _ ->
                     swipeRefresh.isRefreshing = false
-                }
-                .setPositiveButton(getString(R.string.update)) { _, _ ->
+                }.setPositiveButton(getString(R.string.update)) { _, _ ->
                     job = CoroutineScope(Dispatchers.Main).launch {
                         try {
                             saveDate(requireActivity(), 0)
@@ -91,11 +87,9 @@ class DailyFragment : Fragment(R.layout.fragment_daily) {
 
                         swipeRefresh.isRefreshing = false
                     }
-                }
-                .setOnDismissListener {
+                }.setOnDismissListener {
                     swipeRefresh.isRefreshing = false
-                }
-                .show()
+                }.show()
         }
     }
 
@@ -165,8 +159,7 @@ class DailyFragment : Fragment(R.layout.fragment_daily) {
             data.shuffle()
 
             val products: Cursor = mDb.rawQuery(
-                "SELECT * FROM products WHERE is_in_fridge = 1",
-                null
+                "SELECT * FROM products WHERE is_in_fridge = 1", null
             )
             products.moveToFirst()
             val fridge: ArrayList<String> = ArrayList()
@@ -177,9 +170,7 @@ class DailyFragment : Fragment(R.layout.fragment_daily) {
             for (i in 0..5) {
                 var having = 0
                 val cursor: Cursor = mDb.rawQuery(
-                    "SELECT * FROM recipes WHERE id = ?",
-                    arrayOf(data[i].toString()),
-                    null
+                    "SELECT * FROM recipes WHERE id = ?", arrayOf(data[i].toString()), null
                 )
                 cursor.moveToFirst()
                 val needed: ArrayList<String> = ArrayList(cursor.getString(4).trim().split(" "))
@@ -209,8 +200,7 @@ class DailyFragment : Fragment(R.layout.fragment_daily) {
 
         } else {
             val products: Cursor = mDb.rawQuery(
-                "SELECT * FROM products WHERE is_in_fridge = 1",
-                null
+                "SELECT * FROM products WHERE is_in_fridge = 1", null
             )
             products.moveToFirst()
             val fridge: ArrayList<String> = ArrayList()
@@ -222,9 +212,7 @@ class DailyFragment : Fragment(R.layout.fragment_daily) {
                 val id = loadDailyRecipe(appContext, "rc$i")
                 var having = 0
                 val cursor: Cursor = mDb.rawQuery(
-                    "SELECT * FROM recipes WHERE id = ?",
-                    arrayOf(id),
-                    null
+                    "SELECT * FROM recipes WHERE id = ?", arrayOf(id), null
                 )
                 cursor.moveToFirst()
                 val needed: ArrayList<String> = ArrayList(cursor.getString(4).trim().split(" "))
@@ -265,9 +253,7 @@ class DailyFragment : Fragment(R.layout.fragment_daily) {
         intent.putExtra("rec", id)
         val options = activity?.let {
             ActivityOptionsCompat.makeSceneTransitionAnimation(
-                it,
-                image,
-                "recipe"
+                it, image, "recipe"
             )
         }
         startActivity(intent, options!!.toBundle())

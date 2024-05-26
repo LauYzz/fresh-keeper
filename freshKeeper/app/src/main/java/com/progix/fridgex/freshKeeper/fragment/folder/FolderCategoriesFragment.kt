@@ -14,6 +14,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import com.example.freshkeeper.R
 import com.google.android.material.transition.MaterialFadeThrough
 import com.jakewharton.rxbinding4.appcompat.queryTextChangeEvents
 import com.progix.fridgex.freshKeeper.R
@@ -66,8 +67,7 @@ class FolderCategoriesFragment : Fragment(R.layout.fragment_folder_categories) {
         while (!cursor2.isAfterLast) {
             listFolder.add(
                 Pair(
-                    secondaryFolderCategoriesImages[cursor2.getInt(0) - 1],
-                    cursor2.getString(2)
+                    secondaryFolderCategoriesImages[cursor2.getInt(0) - 1], cursor2.getString(2)
                 )
             )
             list.add(cursor2.getInt(0) - 1)
@@ -102,10 +102,8 @@ class FolderCategoriesFragment : Fragment(R.layout.fragment_folder_categories) {
         inflater.inflate(R.menu.folder_menu, menu)
         val myActionMenuItem = menu.findItem(R.id.search_search)
         val searchView = myActionMenuItem.actionView as SearchView
-        searchView.queryTextChangeEvents()
-            .debounce(350, TimeUnit.MILLISECONDS)
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe {
+        searchView.queryTextChangeEvents().debounce(350, TimeUnit.MILLISECONDS)
+            .observeOn(AndroidSchedulers.mainThread()).subscribe {
                 search(it.queryText.toString())
             }
 
@@ -118,8 +116,7 @@ class FolderCategoriesFragment : Fragment(R.layout.fragment_folder_categories) {
             val list = ArrayList<RecyclerSortItem>()
 
             val pairList: ArrayList<RecyclerSortItem> = ArrayList()
-            val allRecipes: Cursor =
-                mDb.rawQuery("SELECT * FROM recipes", null)
+            val allRecipes: Cursor = mDb.rawQuery("SELECT * FROM recipes", null)
             allRecipes.moveToFirst()
             while (!allRecipes.isAfterLast) {
                 val id = allRecipes.getInt(0) - 1
@@ -131,12 +128,10 @@ class FolderCategoriesFragment : Fragment(R.layout.fragment_folder_categories) {
                 val carboh = allRecipes.getDouble(13)
                 var having = 0
                 val products: Cursor = mDb.rawQuery(
-                    "SELECT * FROM products WHERE is_in_fridge = 1",
-                    null
+                    "SELECT * FROM products WHERE is_in_fridge = 1", null
                 )
                 products.moveToFirst()
-                val needed: ArrayList<String> =
-                    ArrayList(allRecipes.getString(4).trim().split(" "))
+                val needed: ArrayList<String> = ArrayList(allRecipes.getString(4).trim().split(" "))
                 while (!products.isAfterLast) {
                     if (needed.contains(products.getString(0))) having++
                     products.moveToNext()
@@ -150,17 +145,7 @@ class FolderCategoriesFragment : Fragment(R.layout.fragment_folder_categories) {
                 val xOfY = having.toString() + "/" + needed.size.toString()
                 val percentage = having.toDouble() / needed.size
                 Functions.addItemToList(
-                    id,
-                    pairList,
-                    percentage,
-                    time,
-                    cal,
-                    prot,
-                    fats,
-                    carboh,
-                    indicator,
-                    name,
-                    xOfY
+                    id, pairList, percentage, time, cal, prot, fats, carboh, indicator, name, xOfY
                 )
                 products.close()
                 allRecipes.moveToNext()
@@ -168,8 +153,7 @@ class FolderCategoriesFragment : Fragment(R.layout.fragment_folder_categories) {
             allRecipes.close()
 
             for (item in pairList) {
-                val temp: Int =
-                    searchString(s.lowercase(), item.recipeItem.recipeName.lowercase())
+                val temp: Int = searchString(s.lowercase(), item.recipeItem.recipeName.lowercase())
                 if (temp != 101) {
                     pairArrayList.add(Pair(temp, item))
                 }
@@ -203,9 +187,7 @@ class FolderCategoriesFragment : Fragment(R.layout.fragment_folder_categories) {
         intent.putExtra("rec", id)
         val options = activity?.let {
             ActivityOptionsCompat.makeSceneTransitionAnimation(
-                it,
-                image,
-                "recipe"
+                it, image, "recipe"
             )
         }
         startActivity(intent, options!!.toBundle())

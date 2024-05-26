@@ -62,8 +62,7 @@ class CartFragment : Fragment(R.layout.fragment_cart), ActionModeInterface {
 
         swipeRefresh.setProgressBackgroundColorSchemeColor(
             ContextCompat.getColor(
-                appContext,
-                R.color.manualBackground
+                appContext, R.color.manualBackground
             )
         )
         swipeRefresh.setColorSchemeColors(
@@ -82,8 +81,7 @@ class CartFragment : Fragment(R.layout.fragment_cart), ActionModeInterface {
                 } else {
                     privateAnno.startAnimation(
                         loadAnimation(
-                            requireContext(),
-                            R.anim.item_animation_fall_down
+                            requireContext(), R.anim.item_animation_fall_down
                         )
                     )
                     privateAnno.visibility = View.VISIBLE
@@ -104,8 +102,7 @@ class CartFragment : Fragment(R.layout.fragment_cart), ActionModeInterface {
             } else {
                 privateAnno.startAnimation(
                     loadAnimation(
-                        appContext,
-                        R.anim.item_animation_fall_down
+                        appContext, R.anim.item_animation_fall_down
                     )
                 )
                 privateAnno.visibility = View.VISIBLE
@@ -118,8 +115,7 @@ class CartFragment : Fragment(R.layout.fragment_cart), ActionModeInterface {
 
     private suspend fun getList() = withContext(Dispatchers.IO) {
         cartList.clear()
-        val cursor: Cursor =
-            mDb.rawQuery("SELECT * FROM products WHERE is_in_cart = 1", null)
+        val cursor: Cursor = mDb.rawQuery("SELECT * FROM products WHERE is_in_cart = 1", null)
         cursor.moveToFirst()
 
         while (!cursor.isAfterLast) {
@@ -151,9 +147,9 @@ class CartFragment : Fragment(R.layout.fragment_cart), ActionModeInterface {
         return when (item.itemId) {
             R.id.clear -> {
                 if (recycler?.adapter != null) {
-                    MaterialAlertDialogBuilder(requireContext(), R.style.modeAlert)
-                        .setTitle(getString(R.string.clearCart))
-                        .setPositiveButton(
+                    MaterialAlertDialogBuilder(requireContext(), R.style.modeAlert).setTitle(
+                            getString(R.string.clearCart)
+                        ).setPositiveButton(
                             getString(R.string.cont)
                         ) { _, _ ->
                             val bottomNavigationView: BottomNavigationView =
@@ -165,8 +161,7 @@ class CartFragment : Fragment(R.layout.fragment_cart), ActionModeInterface {
                             CoroutineScope(Dispatchers.Main).launch {
                                 annotationCard!!.startAnimation(
                                     loadAnimation(
-                                        requireContext(),
-                                        R.anim.item_animation_fall_down
+                                        requireContext(), R.anim.item_animation_fall_down
                                     )
                                 )
                                 annotationCard!!.visibility = View.VISIBLE
@@ -175,13 +170,11 @@ class CartFragment : Fragment(R.layout.fragment_cart), ActionModeInterface {
                                 undoOrDoActionCoroutine("do")
                             }
 
-                            CustomSnackbar(requireContext())
-                                .create(
+                            CustomSnackbar(requireContext()).create(
                                     (context as MainActivity).findViewById(R.id.main_root),
                                     getString(R.string.clearSuccessCart),
                                     BaseTransientBottomBar.LENGTH_LONG
-                                )
-                                .setAction(getString(R.string.undo)) {
+                                ).setAction(getString(R.string.undo)) {
                                     CoroutineScope(Dispatchers.Main).launch {
                                         loading.visibility = View.VISIBLE
                                         annotationCard!!.visibility = View.GONE
@@ -193,16 +186,11 @@ class CartFragment : Fragment(R.layout.fragment_cart), ActionModeInterface {
                                         behavior.slideUp(bottomNavigationView)
                                         loading.visibility = View.GONE
                                     }
-                                }
-                                .show()
-                        }
-                        .setNegativeButton(getString(R.string.cancel), null)
-                        .show()
+                                }.show()
+                        }.setNegativeButton(getString(R.string.cancel), null).show()
                 } else {
                     Toast.makeText(
-                        requireContext(),
-                        getString(R.string.clearErrorCart),
-                        Toast.LENGTH_SHORT
+                        requireContext(), getString(R.string.clearErrorCart), Toast.LENGTH_SHORT
                     ).show()
                 }
                 true
@@ -222,8 +210,7 @@ class CartFragment : Fragment(R.layout.fragment_cart), ActionModeInterface {
                 val sendIntent = Intent()
                 sendIntent.action = Intent.ACTION_SEND
                 sendIntent.putExtra(
-                    Intent.EXTRA_TEXT,
-                    sharing + "\n" + getString(R.string.copiedFrom)
+                    Intent.EXTRA_TEXT, sharing + "\n" + getString(R.string.copiedFrom)
                 )
 
                 sendIntent.type = "text/plain"

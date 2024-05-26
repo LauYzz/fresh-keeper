@@ -10,6 +10,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
+import com.example.freshkeeper.R
 import com.google.android.material.transition.MaterialFadeThrough
 import com.progix.fridgex.freshKeeper.BuildConfig
 import com.progix.fridgex.freshKeeper.R
@@ -32,16 +33,15 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
     @SuppressLint("SetTextI18n")
     override fun onViewCreated(v: View, savedInstanceState: Bundle?) {
         super.onViewCreated(v, savedInstanceState)
-        val settingsList: ArrayList<String> =
-            ArrayList(
-                listOf(
-                    getString(R.string.nightMode),
-                    getString(R.string.themeChooser),
-                    getString(R.string.fontSize),
-                    getString(R.string.cartSettings),
-                    getString(R.string.guide)
-                )
+        val settingsList: ArrayList<String> = ArrayList(
+            listOf(
+                getString(R.string.nightMode),
+                getString(R.string.themeChooser),
+                getString(R.string.fontSize),
+                getString(R.string.cartSettings),
+                getString(R.string.guide)
             )
+        )
         val recyclerView: RecyclerView = v.findViewById(R.id.settingsRecycler)
 
         val imageView: ImageView = v.findViewById(R.id.imageView2)
