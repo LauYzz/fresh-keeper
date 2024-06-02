@@ -9,6 +9,7 @@ import android.widget.RadioButton
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.example.freshkeeper.R
 import com.progix.fridgex.freshKeeper.R
 import com.progix.fridgex.freshKeeper.application.FreshKeeperApplication
 import com.progix.fridgex.freshKeeper.extensions.Extensions.getAttrColor
