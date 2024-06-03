@@ -134,8 +134,7 @@ class CartAdapter(var context: Context, var cartList: ArrayList<Pair<String, Str
 
                         }
                         itemView.alpha = 1f
-                        name.paintFlags =
-                            name.paintFlags and Paint.STRIKE_THRU_TEXT_FLAG.inv()
+                        name.paintFlags = name.paintFlags and Paint.STRIKE_THRU_TEXT_FLAG.inv()
                     } else {
                         if (addToFridge) {
                             mDb.execSQL(
@@ -199,15 +198,13 @@ class CartAdapter(var context: Context, var cartList: ArrayList<Pair<String, Str
                 val sendIntent = Intent()
                 sendIntent.action = Intent.ACTION_SEND
                 sendIntent.putExtra(
-                    Intent.EXTRA_TEXT,
-                    sharing + "\n" + context.getString(R.string.copiedFrom)
+                    Intent.EXTRA_TEXT, sharing + "\n" + context.getString(R.string.copiedFrom)
                 )
 
                 sendIntent.type = "text/plain"
                 context.startActivity(
                     Intent.createChooser(
-                        sendIntent,
-                        context.getString(R.string.share)
+                        sendIntent, context.getString(R.string.share)
                     )
                 )
             }
@@ -220,13 +217,11 @@ class CartAdapter(var context: Context, var cartList: ArrayList<Pair<String, Str
                     )
                     notifyItemChanged(tempPositions!![i])
                 }
-                CustomSnackbar(context)
-                    .create(
+                CustomSnackbar(context).create(
                         (context as MainActivity).findViewById(R.id.main_root),
                         context.getString(R.string.addedToStarred),
                         Snackbar.LENGTH_SHORT
-                    )
-                    .setAction(context.getString(R.string.undo)) {
+                    ).setAction(context.getString(R.string.undo)) {
                         for (i in 0 until tempList!!.size) {
                             val temp = tempList!![i]
                             mDb.execSQL(
@@ -235,8 +230,7 @@ class CartAdapter(var context: Context, var cartList: ArrayList<Pair<String, Str
                             )
                             notifyItemChanged(tempPositions!![i])
                         }
-                    }
-                    .show()
+                    }.show()
             }
             "ban" -> {
                 for (i in 0 until tempList!!.size) {
@@ -247,13 +241,11 @@ class CartAdapter(var context: Context, var cartList: ArrayList<Pair<String, Str
                     )
                     notifyItemChanged(tempPositions!![i])
                 }
-                CustomSnackbar(context)
-                    .create(
+                CustomSnackbar(context).create(
                         (context as MainActivity).findViewById(R.id.main_root),
                         context.getString(R.string.addedToBanList),
                         Snackbar.LENGTH_SHORT
-                    )
-                    .setAction(context.getString(R.string.undo)) {
+                    ).setAction(context.getString(R.string.undo)) {
                         for (i in 0 until tempList!!.size) {
                             val temp = tempList!![i]
                             mDb.execSQL(
@@ -262,14 +254,12 @@ class CartAdapter(var context: Context, var cartList: ArrayList<Pair<String, Str
                             )
                             notifyItemChanged(tempPositions!![i])
                         }
-                    }
-                    .show()
+                    }.show()
             }
             "delete" -> {
                 val bottomNav =
                     (context as MainActivity).findViewById<BottomNavigationView>(R.id.bottom_navigation)
-                val layoutParams =
-                    bottomNav.layoutParams as CoordinatorLayout.LayoutParams
+                val layoutParams = bottomNav.layoutParams as CoordinatorLayout.LayoutParams
                 val behavior = layoutParams.behavior as HideBottomViewOnScrollBehavior
                 behavior.slideUp(bottomNav)
 
@@ -281,8 +271,7 @@ class CartAdapter(var context: Context, var cartList: ArrayList<Pair<String, Str
                 for (i in 0 until tempList!!.size) {
                     val temp = tempList!![i]
                     val cursor: Cursor = mDb.rawQuery(
-                        "SELECT * FROM products WHERE product = ?",
-                        listOf(temp).toTypedArray()
+                        "SELECT * FROM products WHERE product = ?", listOf(temp).toTypedArray()
                     )
                     cursor.moveToFirst()
                     if (cursor.getInt(5) == 1) crossList.add(temp)
@@ -307,13 +296,11 @@ class CartAdapter(var context: Context, var cartList: ArrayList<Pair<String, Str
                 Handler(Looper.getMainLooper()).postDelayed({
                     notifyDataSetChanged()
                 }, 500)
-                CustomSnackbar(context)
-                    .create(
+                CustomSnackbar(context).create(
                         (context as MainActivity).findViewById(R.id.main_root),
                         context.getString(R.string.deleteFromCart),
                         Snackbar.LENGTH_SHORT
-                    )
-                    .setAction(context.getString(R.string.undo)) {
+                    ).setAction(context.getString(R.string.undo)) {
                         behavior.slideUp(bottomNav)
                         CartFragment.recycler?.visibility = VISIBLE
                         CartFragment.annotationCard?.visibility = GONE
@@ -334,8 +321,7 @@ class CartAdapter(var context: Context, var cartList: ArrayList<Pair<String, Str
                             else cartList.add(delList[i])
                         }
                         notifyDataSetChanged()
-                    }
-                    .show()
+                    }.show()
             }
         }
         isMultiSelectOn = false
@@ -343,8 +329,7 @@ class CartAdapter(var context: Context, var cartList: ArrayList<Pair<String, Str
 
     private var lastPosition = -1
     private fun setAnimation(viewToAnimate: View, position: Int) {
-        val animation: Animation =
-            loadAnimation(context, R.anim.item_animation_fall_down)
+        val animation: Animation = loadAnimation(context, R.anim.item_animation_fall_down)
         viewToAnimate.startAnimation(animation)
         lastPosition = position
     }
