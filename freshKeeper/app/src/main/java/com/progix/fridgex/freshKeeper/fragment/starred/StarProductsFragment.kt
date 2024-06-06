@@ -40,8 +40,7 @@ class StarProductsFragment : Fragment(R.layout.fragment_star_products), ActionMo
             } else {
                 annotationCard.startAnimation(
                     AnimationUtils.loadAnimation(
-                        requireContext(),
-                        R.anim.item_animation_fall_down
+                        requireContext(), R.anim.item_animation_fall_down
                     )
                 )
                 annotationCard.visibility = View.VISIBLE
@@ -50,26 +49,25 @@ class StarProductsFragment : Fragment(R.layout.fragment_star_products), ActionMo
         }
     }
 
-    private suspend fun startCoroutine() =
-        withContext(Dispatchers.IO) {
-            val pairList: ArrayList<Pair<String, String>> = ArrayList()
+    private suspend fun startCoroutine() = withContext(Dispatchers.IO) {
+        val pairList: ArrayList<Pair<String, String>> = ArrayList()
 
-            val cursor: Cursor =
-                MainActivity.mDb.rawQuery("SELECT * FROM products WHERE is_starred = 1", null)
-            cursor.moveToFirst()
+        val cursor: Cursor =
+            MainActivity.mDb.rawQuery("SELECT * FROM products WHERE is_starred = 1", null)
+        cursor.moveToFirst()
 
-            while (!cursor.isAfterLast) {
-                pairList.add(Pair(cursor.getString(2), cursor.getString(1)))
-                cursor.moveToNext()
-            }
-            pairList.sortBy { it.first }
-
-            cursor.close()
-
-            productsList = pairList
-
-            delay(200)
+        while (!cursor.isAfterLast) {
+            pairList.add(Pair(cursor.getString(2), cursor.getString(1)))
+            cursor.moveToNext()
         }
+        pairList.sortBy { it.first }
+
+        cursor.close()
+
+        productsList = pairList
+
+        delay(200)
+    }
 
     companion object {
         var prodRecycler: RecyclerView? = null

@@ -11,6 +11,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.example.freshkeeper.R
+import com.getkeepsafe.taptargetview.BuildConfig
 import com.google.android.material.transition.MaterialFadeThrough
 import com.progix.fridgex.freshKeeper.BuildConfig
 import com.progix.fridgex.freshKeeper.R

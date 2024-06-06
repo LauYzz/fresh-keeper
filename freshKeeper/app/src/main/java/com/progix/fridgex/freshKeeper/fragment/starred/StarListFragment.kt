@@ -48,8 +48,7 @@ class StarListFragment : Fragment(R.layout.fragment_star_list) {
         val viewPager: ViewPager2 = v.findViewById(R.id.star_view_pager)
         viewPager.adapter = StarredViewPagerAdapter(requireActivity())
         val titles = arrayOf(
-            getString(R.string.recipes),
-            getString(R.string.products)
+            getString(R.string.recipes), getString(R.string.products)
         )
         val tabLayout = v.findViewById<TabLayout>(R.id.tabs)
         TabLayoutMediator(
@@ -89,8 +88,10 @@ class StarListFragment : Fragment(R.layout.fragment_star_list) {
                                 val multiArrayBoolean = booleanArrayOf(
                                     true
                                 )
-                                MaterialAlertDialogBuilder(requireContext(), R.style.modeAlert)
-                                    .setTitle(getString(R.string.clear))
+                                MaterialAlertDialogBuilder(
+                                    requireContext(),
+                                    R.style.modeAlert
+                                ).setTitle(getString(R.string.clear))
                                     .setPositiveButton(getString(R.string.ok)) { _, _ ->
                                         if (multiArrayBoolean[0]) {
                                             recRecycler?.visibility = GONE
@@ -106,8 +107,7 @@ class StarListFragment : Fragment(R.layout.fragment_star_list) {
                                                 55,
                                                 (requireContext() as MainActivity).findViewById(R.id.main_root),
                                                 getString(R.string.clearSuccessStarred)
-                                            )
-                                                .setAction(getString(R.string.undo)) {
+                                            ).setAction(getString(R.string.undo)) {
                                                     for (i in recipeList!!) {
                                                         val t = i.recipeItem.recipeName
                                                         mDb.execSQL(
@@ -119,18 +119,14 @@ class StarListFragment : Fragment(R.layout.fragment_star_list) {
                                                         recRecycler?.visibility = VISIBLE
                                                         recAnno?.visibility = GONE
                                                     }
-                                                }
-                                                .show()
+                                                }.show()
                                         }
-                                    }
-                                    .setNegativeButton(getString(R.string.cancel), null)
+                                    }.setNegativeButton(getString(R.string.cancel), null)
                                     .setMultiChoiceItems(
-                                        multiArray,
-                                        multiArrayBoolean
+                                        multiArray, multiArrayBoolean
                                     ) { _, which, isChecked ->
                                         multiArrayBoolean[which] = isChecked
-                                    }
-                                    .show()
+                                    }.show()
                             } else {
                                 Toast.makeText(
                                     requireContext(),
@@ -147,8 +143,10 @@ class StarListFragment : Fragment(R.layout.fragment_star_list) {
                                 val multiArrayBoolean = booleanArrayOf(
                                     true
                                 )
-                                MaterialAlertDialogBuilder(requireContext(), R.style.modeAlert)
-                                    .setTitle(getString(R.string.clear))
+                                MaterialAlertDialogBuilder(
+                                    requireContext(),
+                                    R.style.modeAlert
+                                ).setTitle(getString(R.string.clear))
                                     .setPositiveButton(getString(R.string.ok)) { _, _ ->
                                         if (multiArrayBoolean[0]) {
                                             prodRecycler?.visibility = GONE
@@ -164,8 +162,7 @@ class StarListFragment : Fragment(R.layout.fragment_star_list) {
                                                 55,
                                                 (requireContext() as MainActivity).findViewById(R.id.main_root),
                                                 getString(R.string.clearSuccessStarredProd)
-                                            )
-                                                .setAction(getString(R.string.undo)) {
+                                            ).setAction(getString(R.string.undo)) {
                                                     for (i in productsList!!) {
                                                         val t = i.first
                                                         mDb.execSQL(
@@ -177,18 +174,14 @@ class StarListFragment : Fragment(R.layout.fragment_star_list) {
                                                         prodRecycler?.visibility = VISIBLE
                                                         prodAnno?.visibility = GONE
                                                     }
-                                                }
-                                                .show()
+                                                }.show()
                                         }
-                                    }
-                                    .setNegativeButton(getString(R.string.cancel), null)
+                                    }.setNegativeButton(getString(R.string.cancel), null)
                                     .setMultiChoiceItems(
-                                        multiArray,
-                                        multiArrayBoolean
+                                        multiArray, multiArrayBoolean
                                     ) { _, which, isChecked ->
                                         multiArrayBoolean[which] = isChecked
-                                    }
-                                    .show()
+                                    }.show()
                             } else {
                                 Toast.makeText(
                                     requireContext(),

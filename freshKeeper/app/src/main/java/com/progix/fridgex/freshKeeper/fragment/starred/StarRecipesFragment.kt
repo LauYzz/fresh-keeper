@@ -10,6 +10,7 @@ import android.view.animation.AnimationUtils
 import androidx.core.app.ActivityOptionsCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
+import com.example.freshkeeper.R
 import com.google.android.material.card.MaterialCardView
 import com.google.android.material.progressindicator.CircularProgressIndicator
 import com.progix.fridgex.freshKeeper.R
@@ -50,8 +51,7 @@ class StarRecipesFragment : Fragment(R.layout.fragment_star_recipes), ActionMode
             } else {
                 annotationCard.startAnimation(
                     AnimationUtils.loadAnimation(
-                        requireContext(),
-                        R.anim.item_animation_fall_down
+                        requireContext(), R.anim.item_animation_fall_down
                     )
                 )
                 annotationCard.visibility = VISIBLE
@@ -67,71 +67,55 @@ class StarRecipesFragment : Fragment(R.layout.fragment_star_recipes), ActionMode
         intent.putExtra("rec", id)
         val options = activity?.let {
             ActivityOptionsCompat.makeSceneTransitionAnimation(
-                it,
-                image,
-                "recipe"
+                it, image, "recipe"
             )
         }
         startActivity(intent, options!!.toBundle())
     }
 
-    private suspend fun startCoroutine() =
-        withContext(Dispatchers.IO) {
-            val pairList: ArrayList<RecyclerSortItem> = ArrayList()
-            val allRecipes: Cursor =
-                mDb.rawQuery("SELECT * FROM recipes WHERE is_starred = 1", null)
-            allRecipes.moveToFirst()
-            while (!allRecipes.isAfterLast) {
-                val id = allRecipes.getInt(0) - 1
-                val name = allRecipes.getString(3)
-                val time = allRecipes.getInt(6)
-                val cal = allRecipes.getInt(10).toDouble()
-                val prot = allRecipes.getDouble(11)
-                val fats = allRecipes.getDouble(12)
-                val carboh = allRecipes.getDouble(13)
-                var having = 0
-                val products: Cursor = mDb.rawQuery(
-                    "SELECT * FROM products WHERE is_in_fridge = 1",
-                    null
-                )
-                products.moveToFirst()
-                val needed: ArrayList<String> =
-                    ArrayList(allRecipes.getString(4).trim().split(" "))
-                while (!products.isAfterLast) {
-                    if (needed.contains(products.getString(0))) having++
-                    products.moveToNext()
-                }
-                var indicator = 0
-                when {
-                    having <= 0.49 * needed.size -> indicator = R.drawable.indicator_2
-                    having <= 0.74 * needed.size -> indicator = R.drawable.indicator_1
-                    having <= needed.size -> indicator = R.drawable.indicator_0
-                }
-                val xOfY = having.toString() + "/" + needed.size.toString()
-                val percentage = having.toDouble() / needed.size
-                Functions.addItemToList(
-                    id,
-                    pairList,
-                    percentage,
-                    time,
-                    cal,
-                    prot,
-                    fats,
-                    carboh,
-                    indicator,
-                    name,
-                    xOfY
-                )
-                products.close()
-                allRecipes.moveToNext()
+    private suspend fun startCoroutine() = withContext(Dispatchers.IO) {
+        val pairList: ArrayList<RecyclerSortItem> = ArrayList()
+        val allRecipes: Cursor = mDb.rawQuery("SELECT * FROM recipes WHERE is_starred = 1", null)
+        allRecipes.moveToFirst()
+        while (!allRecipes.isAfterLast) {
+            val id = allRecipes.getInt(0) - 1
+            val name = allRecipes.getString(3)
+            val time = allRecipes.getInt(6)
+            val cal = allRecipes.getInt(10).toDouble()
+            val prot = allRecipes.getDouble(11)
+            val fats = allRecipes.getDouble(12)
+            val carboh = allRecipes.getDouble(13)
+            var having = 0
+            val products: Cursor = mDb.rawQuery(
+                "SELECT * FROM products WHERE is_in_fridge = 1", null
+            )
+            products.moveToFirst()
+            val needed: ArrayList<String> = ArrayList(allRecipes.getString(4).trim().split(" "))
+            while (!products.isAfterLast) {
+                if (needed.contains(products.getString(0))) having++
+                products.moveToNext()
             }
-            allRecipes.close()
-            pairList.sortBy { it.recipeItem.recipeName }
-
-            recipeList = pairList
-
-            delay(200)
+            var indicator = 0
+            when {
+                having <= 0.49 * needed.size -> indicator = R.drawable.indicator_2
+                having <= 0.74 * needed.size -> indicator = R.drawable.indicator_1
+                having <= needed.size -> indicator = R.drawable.indicator_0
+            }
+            val xOfY = having.toString() + "/" + needed.size.toString()
+            val percentage = having.toDouble() / needed.size
+            Functions.addItemToList(
+                id, pairList, percentage, time, cal, prot, fats, carboh, indicator, name, xOfY
+            )
+            products.close()
+            allRecipes.moveToNext()
         }
+        allRecipes.close()
+        pairList.sortBy { it.recipeItem.recipeName }
+
+        recipeList = pairList
+
+        delay(200)
+    }
 
     companion object {
         var recRecycler: RecyclerView? = null
