@@ -17,6 +17,7 @@ import android.widget.TextView
 import androidx.appcompat.widget.PopupMenu
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.freshkeeper.R
 import com.google.android.material.snackbar.Snackbar
 import com.progix.fridgex.freshKeeper.R
 import com.progix.fridgex.freshKeeper.activity.MainActivity
@@ -73,9 +74,7 @@ class DailyAdapter(
         val params = holder.itemView.layoutParams
         val random = rand[position]
         val pixels = TypedValue.applyDimension(
-            TypedValue.COMPLEX_UNIT_DIP,
-            random.toFloat(),
-            context.resources.displayMetrics
+            TypedValue.COMPLEX_UNIT_DIP, random.toFloat(), context.resources.displayMetrics
         )
         params.height = pixels.toInt()
         holder.itemView.layoutParams = params
@@ -101,11 +100,7 @@ class DailyAdapter(
                 R.id.star_recipe -> {
                     mDb.execSQL("UPDATE recipes SET is_starred = 1 WHERE id = $id")
                     showSnackBar(
-                        context.getString(R.string.addedToStarred),
-                        id,
-                        position,
-                        "is_starred",
-                        0
+                        context.getString(R.string.addedToStarred), id, position, "is_starred", 0
                     )
                     notifyItemChanged(position)
                     true
@@ -113,11 +108,7 @@ class DailyAdapter(
                 R.id.ban_recipe -> {
                     mDb.execSQL("UPDATE recipes SET banned = 1 WHERE id = $id")
                     showSnackBar(
-                        context.getString(R.string.addedToBanList),
-                        id,
-                        position,
-                        "banned",
-                        0
+                        context.getString(R.string.addedToBanList), id, position, "banned", 0
                     )
                     notifyItemChanged(position)
                     true
@@ -150,17 +141,12 @@ class DailyAdapter(
 
     private fun showSnackBar(text: String, id: Int, position: Int, modifier: String, value: Int) {
 
-        CustomSnackbar(context)
-            .create(
-                (context as MainActivity).findViewById(R.id.main_root),
-                text,
-                Snackbar.LENGTH_LONG
-            )
-            .setAction(context.getString(R.string.undo)) {
+        CustomSnackbar(context).create(
+                (context as MainActivity).findViewById(R.id.main_root), text, Snackbar.LENGTH_LONG
+            ).setAction(context.getString(R.string.undo)) {
                 mDb.execSQL("UPDATE recipes SET $modifier = $value WHERE id = $id")
                 notifyItemChanged(position)
-            }
-            .show()
+            }.show()
     }
 
 
@@ -197,10 +183,7 @@ class DailyAdapter(
     }
 
     private fun recursiveOnClick(
-        onClickListener: OnClickListener,
-        itemView: View,
-        image: ImageView,
-        id: Int
+        onClickListener: OnClickListener, itemView: View, image: ImageView, id: Int
     ) {
         itemView.setOnClickListener {
             itemView.setOnClickListener {}
@@ -213,8 +196,7 @@ class DailyAdapter(
 
     class OnClickListener(val clickListener: (ImageView, Int) -> Unit) {
         fun onClick(
-            image: ImageView,
-            id: Int
+            image: ImageView, id: Int
         ) = clickListener(image, id)
     }
 
