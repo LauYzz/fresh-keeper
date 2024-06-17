@@ -1,0 +1,191 @@
+
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="app_name" translatable="false">冰鲜助手</string>
+    <string name="daily" translatable="false">每日推荐</string>
+    <string name="search" translatable="false">搜索</string>
+    <string name="fridge" translatable="false">冰箱</string>
+    <string name="cart" translatable="false">购物车</string>
+    <string name="starred" translatable="false">收藏</string>
+    <string name="ban_list" translatable="false">屏蔽列表</string>
+    <string name="recipe_catalog" translatable="false">食谱目录</string>
+    <string name="create_edit_recipes" translatable="false">创建或编辑食谱</string>
+    <string name="guide">引导完成</string>
+    <string name="measures" translatable="false">重量和度量</string>
+    <string name="settings" translatable="false">设置</string>
+    <string name="exitConfirm">请再次点击返回键退出</string>
+    <string name="filter" translatable="false">过滤</string>
+    <string name="clearFridge">清空冰箱</string>
+    <string name="addG">添加产品</string>
+    <string name="clearCart">清空购物车</string>
+    <string name="clearStarred">清空收藏</string>
+    <string name="none" translatable="false">无</string>
+    <string name="nightMode">夜间模式</string>
+    <string name="cancel">取消</string>
+
+    <string name="on">开</string>
+    <string name="off">关</string>
+    <string name="auto">系统默认</string>
+    <string name="ok" translatable="false" tools:override="true">确定</string>
+    <string name="version">版本</string>
+    <string name="codeLines" translatable="false">10k 纯代码行数</string>
+
+    <string name="updatedRecently">应用已更新</string>
+    <string name="update">更新</string>
+    <string name="updateMessage">您需要更新数据库以继续工作。\n无论如何，在单击“更新”按钮后不要关闭应用程序 - 否则会导致完全数据丢失\n以及将来应用程序失败</string>
+    <string name="bdSuccess">数据库已成功更新</string>
+    <string name="pass">完成</string>
+    <string name="recipesOfTheDay">今日食谱</string>
+    <string name="guider">您是否想进行简短的指南，并了解应用的主要功能？</string>
+    <string name="skip">跳过</string>
+    <string name="guideDaily">每天您将能够查看 6 个独特的食谱</string>
+    <string name="guideSearch">这里将基于您冰箱中的内容选择食谱</string>
+    <string name="guideFridge">冰箱中可用的产品将显示在这里</string>
+    <string name="annotation1">未找到食谱，请尝试在冰箱中添加更多产品或检查您的屏蔽列表</string>
+    <string name="searchG">搜索</string>
+    <string name="annotation2">喜欢的食谱为空，长按您喜欢的食谱即可添加到这里</string>
+    <string name="clear">清空</string>
+    <string name="clearSuccessStarred">收藏的食谱已清空</string>
+    <string name="annotation3">您的冰箱是空的，请尝试添加一些食物</string>
+    <string name="clearErrorFridge">要清空冰箱，请先填满冰箱</string>
+    <string name="fridgeG">冰箱</string>
+    <string name="clearSuccessFridge">冰箱已清空</string>
+    <string name="annotation4">购物篮是空的，点击“加号”按钮添加产品。将食谱添加到收藏夹时，缺少的产品将自动放入购物篮</string>
+    <string name="clearErrorCart">要清空购物篮，请先填满购物篮</string>
+    <string name="cartG">购物车</string>
+    <string name="clearSuccessCart">购物篮已清空</string>
+    <string name="annotation5">未找到自定义食谱，请创建您的第一道食谱！</string>
+    <string name="saveError">为保存食谱，请填写所有字段</string>
+    <string name="deleted">食谱已成功删除</string>
+    <string name="saved">食谱已成功保存</string>
+    <string name="saveErrorName">已存在此名称的食谱</string>
+    <string name="saveY">保存</string>
+    <string name="recipe">食谱</string>
+    <string name="chooseProd">选择产品</string>
+    <string name="portions">份量：</string>
+    <string name="taste">根据您的口味</string>
+    <string name="delStar">食谱已从收藏中移除</string>
+    <string name="editor">编辑</string>
+    <string name="cookTime">烹饪时间</string>
+    <string name="minutes">分钟</string>
+    <string name="calories">千卡/100克</string>
+    <string name="cal">卡路里</string>
+    <string name="source">来源</string>
+    <string name="redirect">正在重定向到浏览器</string>
+    <string name="redirectMessage">您将被重定向到外部资源，是否继续？</string>
+    <string name="cont">继续</string>
+    <string name="copiedFrom">从 FridgeXLite 应用程序 github.com/t8rin/fridgexlite 复制</string>
+    <string name="products">产品</string>
+    <string name="category">类别</string>
+    <string name="timeCook">烹饪时间</string>
+    <string name="portionsStart">份量：1</string>
+    <string name="copiedRecipe">食谱已复制到剪贴板</string>
+    <string name="share">分享</string>
+    <string name="copy">复制</string>
+
+    <string name="recipes">食谱</string>
+    <string name="annotation6">喜欢的产品为空，请长按您喜欢的产品，或者在冰箱中点击以添加到这里</string>
+    <string name="shopping">购物清单</string>
+    <string name="buy">需要购买：</string>
+    <string name="addToFridge">添加到冰箱</string>
+    <string name="addToCart">添加到购物车</string>
+    <string name="clearSuccessStarredProd">收藏的产品已清空</string>
+    <string name="clearSuccessStarredAll">收藏页面已完全清空</string>
+    <string name="annotation7">禁用的食谱为空，请打开您不喜欢的食谱并点击禁用按钮</string>
+    <string name="annotation8">禁用的产品为空，请通过点击“加号”按钮添加您不喜欢的产品</string>
+    <string name="delBan">食谱已从屏蔽列表中移除</string>
+    <string name="clearSuccessBannedAll">屏蔽页面已完全清空</string>
+    <string name="clearSuccessBannedProd">屏蔽的产品已清空</string>
+    <string name="clearSuccessBanned">屏蔽的食谱已清空</string>
+    <string name="proteins">蛋白质</string>
+    <string name="gram">克/100克</string>
+    <string name="fats">脂肪</string>
+    <string name="carbohydrates">碳水化合物</string>
+    <string name="tips" translatable="false">小贴士</string>
+    <string name="categories">分类</string>
+    <string name="amount">按冰箱</string>
+    <string name="byTime">按时间</string>
+    <string name="byCal">按卡路里</string>
+    <string name="byProt">按蛋白质</string>
+    <string name="byFats">按脂肪</string>
+    <string name="byCbh">按碳水化合物</string>
+    <string name="chooseSort">选择如何排序食谱</string>
+    <string name="dots" translatable="false"/>
+
+    <string name="infoTab">信息</string>
+    <string name="reversed">使用逆向排序方法</string>
+
+    <string name="toStar">添加到收藏夹</string>
+    <string name="toCart">添加到购物车</string>
+    <string name="ban">禁止</string>
+    <string name="addedToStarred">已添加到收藏夹</string>
+    <string name="addedToBanList">已添加到禁止列表</string>
+    <string name="undo">撤销</string>
+    <string name="deBan">取消禁止</string>
+    <string name="deStar">取消收藏</string>
+    <string name="delBanProd">产品已从屏蔽列表中移除</string>
+    <string name="addedToCart">已添加到购物车</string>
+    <string name="delStarProd">产品已从收藏夹中移除</string>
+    <string name="rating">用户评分</string>
+    <string name="inStarred">在收藏夹中</string>
+    <string name="inBanned">已屏蔽</string>
+    <string name="toFridge">添加到冰箱</string>
+    <string name="delFridgeProduct">产品已从冰箱中删除</string>
+    <string name="cartSettings">冰箱和购物车绑定</string>
+    <string name="ignoreMessage">（自动添加到冰箱将被禁用）</string>
+    <string name="addingModeMessage">（当你从购物篮中结账产品时，它将自动添加到冰箱中）</string>
+    <string name="deleteWord">删除</string>
+    <string name="deletedFromStarred">从收藏夹中删除</string>
+    <string name="addedToFridge">已添加到冰箱</string>
+    <string name="deFridge">删除冰箱</string>
+    <string name="deCart">删除购物车</string>
+    <string name="deleteFromCart">从购物车中删除</string>
+    <string name="deleteFromFridge">从冰箱中删除</string>
+    <string name="starClearError">您没有收藏的项目，请添加它们以执行清除操作</string>
+    <string name="cup200">杯子 200毫升</string>
+    <string name="cup250">杯子 250毫升</string>
+    <string name="tbsp">大匙</string>
+    <string name="tsp">小匙</string>
+    <string name="onePiece">一件</string>
+    <string name="deletedFromBanned">从禁止列表中删除</string>
+    <string name="banClearError">您还没有屏蔽任何内容</string>
+    <string name="recipeName">食谱名称</string>
+    <string name="timeCookRecipe">时间</string>
+    <string name="theFieldCantBeEmpty">字段不能为空！</string>
+    <string name="chooseCategory">请选择类别！</string>
+    <string name="recipeHint">带有操作的食谱</string>
+    <string name="someFilledTitleAlert">食谱创建已开始</string>
+    <string name="someFilledMessageAlert">您已开始创建食谱，但尚未完成，您想继续还是取消创建？</string>
+    <string name="otmenyt">取消创建</string>
+    <string name="recipeIsAlmostReady">食谱准备就绪</string>
+    <string name="recipeIsAlmostReadyMessage">您想保存它还是取消创建？</string>
+    <string name="addProducts">添加产品！</string>
+    <string name="annotationEditing">通过点击此图标添加产品</string>
+    <string name="thereIsNoChangesToSave">没有要保存的更改</string>
+    <string name="recipeDeleted">食谱将在5秒后删除</string>
+    <string name="wait">在上一个食谱删除之前等待！</string>
+    <string name="recipeIsAlmostReadyMessageEditing">您想保存它还是放弃更改？</string>
+    <string name="discard">"放弃 "</string>
+    <string name="guideCart">在这里您可以管理您的购物清单，检查设置，以设置其行为</string>
+    <string name="otherOptions">其他选项</string>
+    <string name="guideOther">您可以在这里找到更多功能，让我们去吧！</string>
+    <string name="guideAlert">您还可以在设置页面上完成指南</string>
+    <string name="_8_12" translatable="false">8/12</string>
+    <string name="_25" translatable="false">25</string>
+    <string name="waitItIsNecessary">等待…\n 这是必要的</string>
+    <string name="recipeIsAlmostReadyMessageEditingFab">您想保存它还是要进行一些更改？</string>
+    <string name="updateDailyRecipes">更新每日食谱？</string>
+    <string name="thisWillUpdateDailyRecipes">您想要更新每日食谱吗？ 您将立即看到新的六道新鲜的食谱，无需等待下一天</string>
+    <string name="themeChooser">颜色方案</string>
+    <string name="fontSize">字体大小</string>
+    <string name="smaller">较小</string>
+    <string name="small">小</string>
+    <string name="normal">正常</string>
+    <string name="big">大</string>
+    <string name="bigger">更大</string>
+    <string name="tooLargeImage">图像太大</string>
+    <string name="nextStep">下一步</string>
+    <string name="bonAppetit">菜肴已准备好，祝您用餐愉快！</string>
+    <string name="repeat">重复</string>
+    <string name="timer">计时器</string>
+    <string name="setTimer">"为此食谱设置计时器 "</string>
+</resources>
