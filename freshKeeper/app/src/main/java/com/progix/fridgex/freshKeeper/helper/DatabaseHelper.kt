@@ -8,8 +8,7 @@ import java.io.File
 import java.io.FileOutputStream
 import java.io.OutputStream
 
-class DatabaseHelper(context: Context) :
-    SQLiteOpenHelper(context, DB_NAME, null, DB_VERSION) {
+class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DB_NAME, null, DB_VERSION) {
     private val mContext: Context
     private var mDataBase: SQLiteDatabase? = null
 
@@ -48,8 +47,7 @@ class DatabaseHelper(context: Context) :
             }
             cursor1.close()
             val cursor4 = mDb.rawQuery(
-                "SELECT * FROM recipes WHERE source NOT LIKE ?",
-                arrayOf("Авторский")
+                "SELECT * FROM recipes WHERE source NOT LIKE ?", arrayOf("Авторский")
             )
             cursor4.moveToFirst()
             while (!cursor4.isAfterLast) {

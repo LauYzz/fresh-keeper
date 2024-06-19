@@ -32,9 +32,7 @@ object Functions {
     }
 
     fun saveToInternalStorage(
-        applicationContext: Context,
-        bitmapImage: Bitmap,
-        name: String
+        applicationContext: Context, bitmapImage: Bitmap, name: String
     ): String? {
         val cw = ContextWrapper(applicationContext)
         val directory = cw.getDir("imageDir", Context.MODE_PRIVATE)
@@ -84,13 +82,8 @@ object Functions {
             true -> {
                 pairList.add(
                     RecyclerSortItem(
-                        percentage, time, cal, prot, fats, carboh,
-                        RecipeItem(
-                            DataArrays.recipeImages[id],
-                            indicator,
-                            name,
-                            time.toString(),
-                            xOfY
+                        percentage, time, cal, prot, fats, carboh, RecipeItem(
+                            DataArrays.recipeImages[id], indicator, name, time.toString(), xOfY
                         )
                     )
                 )
@@ -98,13 +91,8 @@ object Functions {
             else -> {
                 pairList.add(
                     RecyclerSortItem(
-                        percentage, time, cal, prot, fats, carboh,
-                        RecipeItem(
-                            -1,
-                            indicator,
-                            name,
-                            time.toString(),
-                            xOfY
+                        percentage, time, cal, prot, fats, carboh, RecipeItem(
+                            -1, indicator, name, time.toString(), xOfY
                         )
                     )
                 )
